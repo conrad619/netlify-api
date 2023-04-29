@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Netlify Functions Example</title>
+</head>
+<body>
+  <h1>Netlify Functions Example</h1>
+  <button id="get-user-btn">Get User</button>
+  <div id="user-container"></div>
+  <script src="/index.js"></script>
+  <script>
+    const getUserBtn = document.getElementById('get-user-btn');
+const userContainer = document.getElementById('user-container');
+
+getUserBtn.addEventListener('click', () => {
+  fetch('/.netlify/functions/user/octocat')
+    .then(response => response.json())
+    .then(data => {
+      userContainer.innerHTML = `<p>Username: ${data.username}</p>`;
+    })
+    .catch(error => console.error(error));
+});
+  </script>
+</body>
+</html>
